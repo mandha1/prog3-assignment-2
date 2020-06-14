@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,34 +16,55 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> theQuestions = new ArrayList<String>();
+    private ArrayList<String> questions = new ArrayList<String>();
+    private ArrayList<String> answers = new ArrayList<String>();
 
-    @Override
+    private Questions initQ;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-    private void SetUpQuestions() {
+    public void onClick(View v) {
+
+    }
+
+    public void loadQnA() {
+
+        RadioButton rb1 = (RadioButton) findViewById(R.id.radioButton1);
+        RadioButton rb2 = (RadioButton) findViewById(R.id.radioButton2);
+        RadioButton rb3 = (RadioButton) findViewById(R.id.radioButton3);
+        RadioButton rb4 = (RadioButton) findViewById(R.id.radioButton4);
+
+        rb1.setText();
+        rb2.setText();
+        rb3.setText();
+        rb4.setText();
+
+
+
+    }
+
+    private void setUpQuestions() {
 
         try {
-
-            String questions = "questions.txt";
             AssetManager am = getAssets();
-            InputStream is = am.open(questions);
+            InputStream is = am.open("questions.txt");
             InputStreamReader ir = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(ir);
 
-            String newQuestion;
-            while ((newQuestion = br.readLine()) != null) {
-                theQuestions.add(newQuestion);
+            String newQ = "";
+
+            while ((newQ = br.readLine()) != null) {
+                questions.add(newQ);
             }
+
+            br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        br.close();
     }
 
     private void ShowQuestions() {
