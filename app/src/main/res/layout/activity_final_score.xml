@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".FinalScore">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thanks for playing this quiz on wacky NZ tourist attractions!"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/displayScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="179dp" />
+
+    <Button
+        android:id="@+id/exitApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quit App"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="555dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

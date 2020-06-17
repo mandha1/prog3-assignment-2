@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -25,15 +26,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
 
+    private RadioButton[] radBtns = new RadioButton[4];
+
     private RadioGroup ansGroup;
     private RadioButton selectedBtn;
 
     int questionNum = 0;
     int score = 0;
 
+    private ImageView qImg;
+
     String userAns = "";
 
-    private Questions initQ;
+    private Questions qs;
+
     private Answers rawAns;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +48,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ansGroup = (RadioGroup) findViewById(R.id.ansGroup);
 
+        radBtns[0] = (RadioButton) findViewById(R.id.radioButton1);
+        radBtns[1] = (RadioButton) findViewById(R.id.radioButton2);
+        radBtns[2] = (RadioButton) findViewById(R.id.radioButton3);
+        radBtns[3] = (RadioButton) findViewById(R.id.radioButton4);
+
         setUpQuestions();
         setUpAnswers();
 
         rawAns = new Answers(answers);
+
+        qs = new Questions(questions, answers);
 
         Button checkAns = (Button) findViewById(R.id.ansBtn);
         loadQuestion();
@@ -66,14 +79,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selectedBtn = (RadioButton) findViewById(selectedID);
 
                 userAns = selectedBtn.getText().toString();
-                rawAns.CheckAnswer(questionNum, userAns);
+
+                Intent giveRes = new Intent(MainActivity.this, Results.class);
+
+                //If the user gets the answer right
+                if (rawAns.CheckAnswer(questionNum, userAns) == 1) {
+
+                    giveRes.putExtra("outcome", 1);
+                    score += 1;
+                }
+                else {
+                    giveRes.putExtra("outcome", 0);
+                }
+
+                giveRes.putExtra("qNum", questionNum);
+                startActivity(giveRes);
+                questionNum += 1;
             }
         }
 
         if (questionNum > 9) {
-            Intent intent = new Intent(this, FinalScore.class);
-            intent.putExtra("results", this.score);
-            startActivity(intent);
+            Intent finalRes = new Intent(this, FinalScore.class);
+            finalRes.putExtra("results", this.score);
+            startActivity(finalRes);
+        }
+    }
+
+
+
+    public void loadQuestion() {
+
+        int[] currQSet = new int[4];
+        TextView que = (TextView) findViewById(R.id.qsTxtView);
+        qImg = (ImageView) findViewById(R.id.imageView);
+
+        ansGroup.clearCheck();
+
+        currQSet = qs.getQSet(questionNum);
+
+        qImg.setImageResource(R.drawable.carrot);
+
+        que.setText(questions.get(questionNum));
+
+        for (int i = 0; i < radBtns.length; i++) {
+            radBtns[i].setText(currQSet[i]);
+        }
+    }
+
+    private void setUpQuestions() {
+
+        try {
+            AssetManager am = getAssets();
+            InputStream is = am.open("questions.txt");
+            InputStreamReader ir = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(ir);
+
+            String newQ = "";
+
+            while ((newQ = br.readLine()) != null) {
+                questions.add(newQ);
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -99,79 +169,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void loadQuestion() {
-
-        TextView que = (TextView) findViewById(R.id.qsTxtView);
-
-        RadioButton rb1 = (RadioButton) findViewById(R.id.radioButton1);
-        RadioButton rb2 = (RadioButton) findViewById(R.id.radioButton2);
-        RadioButton rb3 = (RadioButton) findViewById(R.id.radioButton3);
-        RadioButton rb4 = (RadioButton) findViewById(R.id.radioButton4);
-
-        switch(questionNum) {
-            case 0:
-                que.setText(questions.get(0));
-
-                rb1.setText(answers.get(0));
-                rb2.setText(answers.get(1));
-                rb3.setText(answers.get(2));
-                rb4.setText(answers.get(3));
-                break;
-            case 1:
-                que.setText(questions.get(1));
-
-                rb1.setText(answers.get(4));
-                rb2.setText(answers.get(5));
-                rb3.setText(answers.get(6));
-                rb4.setText(answers.get(7));
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            default:
-                break;
-        }
-
-
-    }
-
-    private void setUpQuestions() {
-
-        try {
-            AssetManager am = getAssets();
-            InputStream is = am.open("questions.txt");
-            InputStreamReader ir = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(ir);
-
-            String newQ = "";
-
-            while ((newQ = br.readLine()) != null) {
-                questions.add(newQ);
-            }
-
-            br.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void ShowQuestions() {
-
     }
 }
