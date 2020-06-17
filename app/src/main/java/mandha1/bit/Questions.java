@@ -22,7 +22,7 @@ public class Questions {
 
     public int[] getQSet(int qNum) {
 
-        int[] qSet = new int[3];
+        int[] qSet = new int[4];
 
         switch (qNum) {
             case 0:
@@ -45,20 +45,46 @@ public class Questions {
                 qSet[3] = 11;
                 break;
             case 3:
+                qSet[0] = 12;
+                qSet[1] = 13;
+                qSet[2] = 14;
+                qSet[3] = 15;
                 break;
             case 4:
+                qSet[0] = 16;
+                qSet[1] = 17;
+                qSet[2] = 18;
+                qSet[3] = 19;
                 break;
             case 5:
+                qSet[0] = 20;
+                qSet[1] = 21;
+                qSet[2] = 22;
+                qSet[3] = 23;
                 break;
             case 6:
+                qSet[0] = 24;
+                qSet[1] = 25;
+                qSet[2] = 26;
+                qSet[3] = 27;
                 break;
             case 7:
+                qSet[0] = 28;
+                qSet[1] = 29;
+                qSet[2] = 30;
+                qSet[3] = 31;
                 break;
             case 8:
+                qSet[0] = 31;
+                qSet[1] = 32;
+                qSet[2] = 33;
+                qSet[3] = 34;
                 break;
             case 9:
-                break;
-            default:
+                qSet[0] = 35;
+                qSet[1] = 36;
+                qSet[2] = 37;
+                qSet[3] = 38;
                 break;
         }
 

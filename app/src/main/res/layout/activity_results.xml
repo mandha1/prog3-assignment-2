@@ -8,33 +8,46 @@
 
     <ImageView
         android:id="@+id/theImg"
-        android:layout_width="wrap_content"
-        android:layout_height="175"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="73dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="57dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtFAQ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/txtResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="57dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="319dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/theImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtFAQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="431dp" />
+        app:layout_constraintBottom_toTopOf="@+id/nextQ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/theImg" />
 
     <Button
         android:id="@+id/nextQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="91dp"
         android:text="Next Question"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="552dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFAQ" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -93,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 giveRes.putExtra("qNum", questionNum);
-                startActivity(giveRes);
                 questionNum += 1;
+                startActivity(giveRes);
             }
+
+            loadQuestion();
         }
 
         if (questionNum > 9) {

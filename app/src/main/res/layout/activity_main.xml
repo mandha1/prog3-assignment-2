@@ -20,11 +20,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="175"
+        android:layout_width="223dp"
+        android:layout_height="169dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qsTxtView"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -33,7 +32,7 @@
         android:id="@+id/ansBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
         android:text="SUBMIT"
         app:layout_constraintEnd_toEndOf="@+id/ansGroup"

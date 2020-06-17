@@ -31,7 +31,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v.getId() == R.id.nextQ) {
-            Intent setNextQ = new Intent(this, MainActivity.class);
+            Intent setNextQ = new Intent(Results.this, MainActivity.class);
             startActivity(setNextQ);
         }
     }
