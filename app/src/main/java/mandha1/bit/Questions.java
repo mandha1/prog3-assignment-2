@@ -12,19 +12,12 @@ import java.util.ArrayList;
 public class Questions {
 
     private ArrayList<String> questions;
+    private ArrayList<String> answers;
 
-    public Questions() {
+    public Questions(ArrayList<String> questions, ArrayList<String> answers) {
 
-        questions = new ArrayList<String>();
-    }
-
-
-
-    public ArrayList<String> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(ArrayList<String> questions) {
         this.questions = questions;
+        this.answers = answers;
     }
+
 }
