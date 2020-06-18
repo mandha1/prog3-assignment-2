@@ -16,6 +16,8 @@ public class Results extends AppCompatActivity implements View.OnClickListener {
     private TextView res;
     private TextView faq;
 
+    int next = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +32,13 @@ public class Results extends AppCompatActivity implements View.OnClickListener {
 
     public void onClick(View v) {
 
+        next += 1;
+
         if (v.getId() == R.id.nextQ) {
             Intent setNextQ = new Intent(Results.this, MainActivity.class);
+            setNextQ.putExtra("iterateQ", next);
             startActivity(setNextQ);
+
         }
     }
 

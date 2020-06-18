@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int questionNum = 0;
     int score = 0;
 
+    private int[] imgs = new int[10];
     private ImageView qImg;
 
     String userAns = "";
@@ -42,7 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Answers rawAns;
 
+    int iterate = 0;
+
     protected void onCreate(Bundle savedInstanceState) {
+        loadImages();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -61,24 +66,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         qs = new Questions(questions, answers);
 
         Button checkAns = (Button) findViewById(R.id.ansBtn);
-        loadQuestion();
+
         checkAns.setOnClickListener(this);
+        System.out.println(questionNum);
+        loadQuestion();
+    }
+
+    public void loadImages() {
+        imgs[0] = R.drawable.carrot;
+        imgs[1] = R.drawable.trout;
+        imgs[2] = R.drawable.toilet;
+        imgs[3] = R.drawable.landpaeroa;
+        imgs[4] = R.drawable.fruit;
+        imgs[5] = R.drawable.jersey;
+        imgs[6] = R.drawable.bottles;
+        imgs[7] = R.drawable.minions;
+        imgs[8] = R.drawable.kumara;
+        imgs[9] = R.drawable.statue;
     }
 
     public void onClick(View v) {
 
         if (v.getId() == R.id.ansBtn) {
 
+            int selectedID = ansGroup.getCheckedRadioButtonId();
+            selectedBtn = (RadioButton) findViewById(selectedID);
+            userAns = selectedBtn.getText().toString();
+
             if (userAns == "") {
                 Toast.makeText(this, "You haven't put an answer yet.", Toast.LENGTH_LONG).show();
             }
 
             else {
-
-                int selectedID = ansGroup.getCheckedRadioButtonId();
-                selectedBtn = (RadioButton) findViewById(selectedID);
-
-                userAns = selectedBtn.getText().toString();
 
                 Intent giveRes = new Intent(MainActivity.this, Results.class);
 
@@ -93,11 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 giveRes.putExtra("qNum", questionNum);
-                questionNum += 1;
                 startActivity(giveRes);
             }
 
-            loadQuestion();
+            //loadQuestion();
+
+
         }
 
         if (questionNum > 9) {
@@ -111,6 +131,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void loadQuestion() {
 
+//        Intent nextQu = getIntent();
+//        int iterate = nextQu.getIntExtra("iterateQ", -1);
+//        questionNum = iterate;
+
+        questionNum += 1;
         int[] currQSet = new int[4];
         TextView que = (TextView) findViewById(R.id.qsTxtView);
         qImg = (ImageView) findViewById(R.id.imageView);
@@ -119,12 +144,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         currQSet = qs.getQSet(questionNum);
 
-        qImg.setImageResource(R.drawable.carrot);
+        qImg.setImageResource(imgs[questionNum]);
 
         que.setText(questions.get(questionNum));
 
         for (int i = 0; i < radBtns.length; i++) {
-            radBtns[i].setText(currQSet[i]);
+            radBtns[i].setText(answers.get(currQSet[i]));
         }
     }
 
@@ -162,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int column = 0;
 
             while ((newA = br.readLine()) != null) {
-
                 answers.add(newA);
             }
 

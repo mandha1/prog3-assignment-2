@@ -27,13 +27,13 @@ public class FinalScore extends AppCompatActivity implements View.OnClickListene
 
         Intent intent = getIntent();
         total = intent.getIntExtra("results", -1);
-        dispScore.setText("You got a total of " + total + " out of 10 questions correct!");
+        dispScore.setText("You got a total of " + Integer.toString(total) + " out of 10 questions correct!");
     }
 
     public void onClick(View v) {
 
         if (v.getId() == R.id.exitApp) {
-
+            System.exit(1);
         }
     }
 }

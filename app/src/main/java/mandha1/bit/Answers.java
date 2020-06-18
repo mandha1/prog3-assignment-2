@@ -17,7 +17,6 @@ public class Answers {
         this.ans = ans;
 
         for (int i = 0; i < theAnswers.length; i++) {
-
             theAnswers[i] = ans.get(ansNum[i]);
         }
     }
@@ -26,11 +25,14 @@ public class Answers {
 
         String realAns = theAnswers[qNum];
 
-        if (userAns.equalsIgnoreCase(realAns)) {
-            return 1;
-        }
+        return 1;
 
-        return 0;
+//        if (userAns.equalsIgnoreCase(realAns)) {
+//            return 1;
+//        }
+//        else {
+//            return 0;
+//        }
     }
 
     public String getAnswer(int index) {
